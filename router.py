@@ -15,9 +15,9 @@ class Router:
         try:
             if self._exists(method):
                 return getattr(import_module(self.module), method)
-            else:  print("Требуемый отчёт не добавлен в список методов модуля отчётов: " + str(self._routes))
+            else:  print("Требуемый отчёт не существует, список отчётов: " + str(self._routes))
         except AttributeError:
-            print("Требуемый отчёт не существует, список отчётов: " + str(self._routes))
+            print("Требуемый отчёт не добавлен в список публичных функций модуля: " + str(self._routes))
             return None
 
     def _exists(self, method):

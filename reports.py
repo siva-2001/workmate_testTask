@@ -3,9 +3,9 @@ import time
 
 from tabulate import tabulate
 
-__all__ = ["average"]
+__all__ = ["average", "some_report"]
 
-def average(files: list, dates: str | None):
+def average(files: list, dates: str | None = None):
     try:
         urlStat = {}
 
@@ -43,8 +43,15 @@ def average(files: list, dates: str | None):
                        headers=["End point URL", "Total request number", "Average time"],
                        tablefmt="grid"))
 
+        return 0
 
-    except FileNotFoundError: print(f"Указанный файл {filePath} не найден.")
-    except json.decoder.JSONDecodeError: print(f"Содержимое файла {filePath} невозможно декодировать. Формат не соответствует JSON")
-    except ValueError: print("Неверный формат параметра --date, необходимо: YYYY-MM-DD/YYYY-MM-D/YYYY-M-DD/YYYY-M-D")
+    except FileNotFoundError:
+        print(f"Указанный файл {filePath} не найден.")
+        return "fileNotFound"
+    except json.decoder.JSONDecodeError:
+        print(f"Содержимое файла {filePath} невозможно декодировать. Формат не соответствует JSON")
+        return "fileFormatError"
+    except ValueError:
+        print("Неверный формат параметра --date, необходимо: YYYY-MM-DD/YYYY-MM-D/YYYY-M-DD/YYYY-M-D")
+        return "dateFormatError"
 
