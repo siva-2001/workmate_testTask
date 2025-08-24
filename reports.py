@@ -3,7 +3,7 @@ import time
 
 from tabulate import tabulate
 
-__all__ = ["average", "some_report"]
+__all__ = ["average"]
 
 def average(files: list, dates: str | None = None):
     try:
